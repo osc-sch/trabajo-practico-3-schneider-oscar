@@ -1,6 +1,21 @@
 const urlTodosLosPersonajes = 'https://thesimpsonsapi.com/api/characters';
 const urlUnPersonaje = 'https://thesimpsonsapi.com/api/characters/';
 
-fetch(urlTodosLosPersonajes)
-    .then(result => result.json())
-    .then(data => console.log(data.results[0]))
+let personajes = [];
+
+const obtener_personajes = async () => {
+    try {
+        const responce = await fetch(urlTodosLosPersonajes);
+        const data = await responce.json();
+
+        return data.results;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    personajes = await obtener_personajes();
+
+    console.log(personajes);
+})
