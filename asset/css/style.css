@@ -1,3 +1,10 @@
 body{
-    background-color: red;
+    background-image: url('https://image.tmdb.org/t/p/original/lwVk49RH61k6kPtHBdqBq6nCR8n.jpg');
+    background-size: cover; 
+    background-position: center;
+    background-attachment: fixed;
+}
+
+main{
+    min-height: 400px ;
 }
