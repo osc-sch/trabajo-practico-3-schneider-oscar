@@ -4,7 +4,19 @@ const urlUnPersonaje = 'https://thesimpsonsapi.com/api/characters/';
 const contenedorCartas = document.querySelector('#contenedor_cards');
 const buscador = document.querySelector('#buscador');
 const btnLimpiar = document.querySelector('#btn-limpiar');
-const btnVerMas = document.querySelector('#btn_verMas');
+
+const myModalHTML = document.querySelector('#myModal');
+const modal = new bootstrap.Modal(myModalHTML);
+
+const nombre = document.querySelector('#nombre');
+const edad = document.querySelector('#age');
+const cumple = document.querySelector('#cumple');
+const genero = document.querySelector('#sex');
+const ocupacion = document.querySelector('#ocu');
+const estado = document.querySelector('#state');
+const frace = document.querySelector('#phas');
+const image = document.querySelector('#image_detalle');
+const tituloModal = document.querySelector('#myModalLabel');
 
 
 let personajes = [];
@@ -47,7 +59,7 @@ const construir_cuerpo = (lista_personajes) => {
                     <p class="card-text">${personaje.occupation}</p>
                     <p class="${personaje.status === 'Alive'? 'card-text badge text-success bg-light' : 'card-text badge text-danger bg-light'}">${personaje.status}</p>
                     <hr>
-                    <button type="button" class="btn btn-warning btn-verMas" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${personaje.id}">
+                    <button type="button" class="btn btn-warning btn-verMas" data-id="${personaje.id}">
                     Ver Detalles...
                     </button>
                 </div>
@@ -81,32 +93,29 @@ contenedorCartas.addEventListener('click', async (e) =>{
     if(e.target.classList.contains('btn-verMas')){
         console.log(e.target.dataset.id);
 
-        const per = await obtener_un_personaje(e.target.dataset.id);
+        const lista_valores = [image,nombre,edad,cumple,genero,ocupacion,estado,frace,tituloModal];
 
-        const nombre = document.querySelector('#nombre');
-        const age = document.querySelector('#age');
-        const cum = document.querySelector('#cumple');
-        const sex = document.querySelector('#sex');
-        const ocu = document.querySelector('#ocu');
-        const state = document.querySelector('#state');
-        const phas = document.querySelector('#phas');
-        const img = document.querySelector('#image_detalle');
+        const unPersonaje = await obtener_un_personaje(e.target.dataset.id);
 
-        img.src = `https://cdn.thesimpsonsapi.com/500/character/${e.target.dataset.id}.webp`
-        nombre.textContent = `Nombre Completo: ${per.name}`
-        age.textContent = `Edad: ${per.age}`
-        cum.textContent = `Cumpleaños: ${per.birthdate}`
-        sex.textContent = `Genero: ${per.gender}`
-        ocu.textContent = `Ocupacion: ${per.occupation}`
-        state.textContent = `Estado: ${per.status}`
-        phas.textContent = `Frace Iconica: ${per.phrases}`
-
-        console.log(per)
+        image.src = `https://cdn.thesimpsonsapi.com/500/character/${e.target.dataset.id}.webp`
+        nombre.textContent = unPersonaje.name
+        edad.textContent = edad.textContent === null ? unPersonaje.age : 'Desconocido'
+        cumple.textContent = cumple.textContent === null ? unPersonaje.birthdate : 'Desconocido'
+        genero.textContent = unPersonaje.gender
+        ocupacion.textContent = unPersonaje.occupation
+        estado.textContent = unPersonaje.status
+        frace.textContent = unPersonaje.phrases[0]
+        tituloModal.textContent = unPersonaje.name
 
 
+        if(estado.textContent === "Alive"){
+            estado.classList.add('badge','text-success','bg-light');
+        }else{
+            estado.classList.add('badge' ,'text-danger' ,'bg-light');
+        }
 
+        console.log(unPersonaje)
+        modal.show();
     }
-
-    
 })
 

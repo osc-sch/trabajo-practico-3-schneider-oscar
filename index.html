@@ -37,36 +37,36 @@
         <!-- seccion de modal -->
         <section>
             <!-- Modal -->
-            <div class="modal modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="false">
-                <div class="modal-dialog">
+            <div class="modal modal-lg fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog ">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="modal-header justify-content-between">
+                            <h1 class="modal-title fs-5" id="myModalLabel">Modal title</h1>
+                            <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal"
+                                aria-label="Close"><i class="bi bi-x"></i></button>
                         </div>
-                        <div class="modal-body d-flex">
+                        <div class="modal-body d-flex row">
                             <img src="https://cdn.thesimpsonsapi.com/500/character/5.webp" alt="" width="40%"
-                                id="image_detalle">
-                            <div>
-                                <p id="nombre">Nombre Completo</p>
+                                id="image_detalle" class="col-6">
+                            <div class="col-6">
+                                <p></i>Nombre Completo: <span id="nombre"></span></p>
                                 <hr>
-                                <p id="age">edad</p>
+                                <p>Edad: <span id="age"></span></p>
                                 <hr>
-                                <p id="cumple">fecha de nacimiento</p>
+                                <p>Fecha de Nacimiento: <span id="cumple"></span></p>
                                 <hr>
-                                <p id="sex">genero</p>
+                                <p>Genero: <span id="sex"></span></p>
                                 <hr>
-                                <p id="ocu">ocupacion</p>
+                                <p>Ocupacion: <span id="ocu"></span></p>
                                 <hr>
-                                <p id="state">estado</p>
+                                <p>Estado: <span id="state" class="fs-6"></span></p>
                                 <hr>
-                                <p id="phas">frase</p>
+                                <p>Frase: <span id="phas"></span></p>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
