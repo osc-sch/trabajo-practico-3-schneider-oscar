@@ -26,23 +26,52 @@
         </div>
     </nav>
     <main>
-        <!-- contenedor de todas las cartas -->
-        <div class="d-flex m-5 justify-content-around">
-            <div class="row g-4" id="contenedor_cards">
-                <!-- <div class="col-3">
-                    <div class="card" style="width: 18rem;">
-                        <img src="https://cdn.thesimpsonsapi.com/500/character/1.webp" class=" card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Homer Simpson</h5>
-                            <p class="card-text">Safety Inspector</p>
-                            <p class="card-text badge text-success bg-light">Alive</p>
-                            <hr>
-                            <a href="#" class="btn btn-warning" data-id="1">Ver Detalle</a>
+        <!-- seccion de cartas -->
+        <section>
+            <!-- contenedor de todas las cartas -->
+            <div class="d-flex m-5 justify-content-around">
+                <div class="row g-4" id="contenedor_cards">
+                </div>
+            </div>
+        </section>
+        <!-- seccion de modal -->
+        <section>
+            <!-- Modal -->
+            <div class="modal modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body d-flex">
+                            <img src="https://cdn.thesimpsonsapi.com/500/character/5.webp" alt="" width="40%"
+                                id="image_detalle">
+                            <div>
+                                <p id="nombre">Nombre Completo</p>
+                                <hr>
+                                <p id="age">edad</p>
+                                <hr>
+                                <p id="cumple">fecha de nacimiento</p>
+                                <hr>
+                                <p id="sex">genero</p>
+                                <hr>
+                                <p id="ocu">ocupacion</p>
+                                <hr>
+                                <p id="state">estado</p>
+                                <hr>
+                                <p id="phas">frase</p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
-                </div>   -->
+                </div>
             </div>
-        </div>
+        </section>
     </main>
     <footer class=" d-flex p-5 align-items-center justify-content-center bg-dark">
         <p class="text-warning"><em>&copy;Schneider Oscar</em> Todos los derechos reservados</p>
