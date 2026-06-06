@@ -3,7 +3,6 @@ const urlUnPersonaje = 'https://thesimpsonsapi.com/api/characters/';
 
 const contenedorCartas = document.querySelector('#contenedor_cards');
 const buscador = document.querySelector('#buscador');
-const btnBuscar = document.querySelector('#button_buscar');
 const btnLimpiar = document.querySelector('#btn-limpiar');
 
 let personajes = [];
@@ -12,8 +11,6 @@ const obtener_todos_personajes = async () => {
     try {
         const responce = await fetch(urlTodosLosPersonajes);
         const data = await responce.json();
-
-        console.log(data)
         return data;
     } catch (err) {
         console.log(err);
@@ -24,7 +21,6 @@ const construir_cuerpo = (lista_personajes) => {
 
     contenedorCartas.innerHTML = "";
 
-   /* if(lista_personajes.results){*/
         lista_personajes.forEach(personaje => {
        
         contenedorCartas.innerHTML += `
@@ -42,27 +38,7 @@ const construir_cuerpo = (lista_personajes) => {
             </div>
         </div>
 
-        `;
-
-    })/*
-    }else{
-        contenedorCartas.innerHTML += `
-
-        <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="https://cdn.thesimpsonsapi.com/500${lista_personajes.portrait_path}" class=" card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">${lista_personajes.name}</h5>
-                            <p class="card-text">${lista_personajes.occupation}</p>
-                            <p class="${lista_personajes.status === 'Alive'? 'card-text badge text-success bg-light' : 'card-text badge text-danger bg-light'}">${lista_personajes.status}</p>
-                            <hr>
-                            <a href="#" class="btn btn-warning" data-id="${lista_personajes.id}">Ver Detalle</a>
-                        </div>
-                    </div>
-                </div>
-
-        `;
-        console.log(lista_personajes);*/
+        `;})
     }
     
 btnLimpiar.addEventListener('click',()=>{
