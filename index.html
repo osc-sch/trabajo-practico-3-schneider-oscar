@@ -8,6 +8,7 @@
         type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="asset/css/style.css">
     <title>Simpson TV</title>
 </head>
@@ -17,6 +18,13 @@
     <header class="d-flex bg-warning p-4 align-content-center justify-content-center">
         <h1 class="fw-bold">Todos Los personajes de Los Simpson</h1>
     </header>
+    <nav class="p-3 bg-dark d-flex justify-content-center align-items-center">
+        <div class="input-group" style="width: 400px;">
+            <input type="text" class="form-control" placeholder="Buscar Personaje..."
+                aria-label="Recipients username with two button addons" id="buscador">
+            <button class="btn btn-outline-warning" type="button" id="btn-limpiar"><i class="bi bi-x"></i></button>
+        </div>
+    </nav>
     <main>
         <!-- contenedor de todas las cartas -->
         <div class="d-flex m-5 justify-content-around">
