@@ -1,13 +1,18 @@
 const urlTodosLosPersonajes = 'https://thesimpsonsapi.com/api/characters';
 const urlUnPersonaje = 'https://thesimpsonsapi.com/api/characters/';
 
+//elemetos del html
 const contenedorCartas = document.querySelector('#contenedor_cards');
 const buscador = document.querySelector('#buscador');
 const btnLimpiar = document.querySelector('#btn-limpiar');
 
+//elementos del modal
 const myModalHTML = document.querySelector('#myModal');
-const modal = new bootstrap.Modal(myModalHTML);
+const modalInfo = new bootstrap.Modal(myModalHTML);
+const modalErrorHTML = document.querySelector('#modalError');
+const modalError = new bootstrap.Modal(modalErrorHTML);
 
+//varibles para los datos del modal
 const nombre = document.querySelector('#nombre');
 const edad = document.querySelector('#age');
 const cumple = document.querySelector('#cumple');
@@ -21,16 +26,20 @@ const tituloModal = document.querySelector('#myModalLabel');
 
 let personajes = [];
 
+//funcion para traer todos los personajes
 const obtener_todos_personajes = async () => {
     try {
         const responce = await fetch(urlTodosLosPersonajes);
         const data = await responce.json();
         return data;
     } catch (err) {
-        console.log(err);
+        contenedorCartas.innerHTML = `<div class="bg-danger p-5 radius">
+            <h1 class="text-danger-emphasis">Error:Los Sentimos Ocurrio un Error de Conexion</h1>
+        </div>`;
     }
 }
 
+//funcion para traer un personaje 
 const obtener_un_personaje = async (id) => {
     try{
         const responce = await fetch(`${urlUnPersonaje + id}`);
@@ -41,9 +50,8 @@ const obtener_un_personaje = async (id) => {
     }
 }
 
+//funcion para crear las cartas de los personajes
 const construir_cuerpo = (lista_personajes) => {
-
-    
 
     contenedorCartas.innerHTML = "";
 
@@ -67,7 +75,32 @@ const construir_cuerpo = (lista_personajes) => {
         </div>`;})
 
 }
+
+//funcion que incerta los datos obtennidos en la 'funcion obtener_un_personaje'
+const cambiar_datos_modal  = async (id) => {
+
+    const unPersonaje = await obtener_un_personaje(id);
+
+    image.src = `https://cdn.thesimpsonsapi.com/500/character/${id}.webp`
+    nombre.textContent = unPersonaje.name
+    edad.textContent = edad.textContent === null ? unPersonaje.age : 'Desconocido'
+    cumple.textContent = cumple.textContent === null ? unPersonaje.birthdate : 'Desconocido'
+    genero.textContent = unPersonaje.gender
+    ocupacion.textContent = unPersonaje.occupation
+    estado.textContent = unPersonaje.status
+    frace.textContent = unPersonaje.phrases[0]
+    tituloModal.textContent = unPersonaje.name
+
+    if(estado.textContent === "Alive"){
+        estado.classList.add('badge','text-success','bg-light');
+    }else{
+        estado.classList.add('badge' ,'text-danger' ,'bg-light');
+    }
+
+    modalInfo.show();
+}
     
+//escuchar eventos 
 btnLimpiar.addEventListener('click',()=>{
     buscador.value ='';
     construir_cuerpo(personajes.results);
@@ -82,40 +115,27 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 buscador.addEventListener('input',() => {
 
-    const buscar = personajes.results.filter(personaje => personaje.name.toLowerCase().includes(buscador.value));
+    const buscar = personajes.results.filter(personaje => personaje.name.toLowerCase().includes(buscador.value.toLowerCase()));
 
-    construir_cuerpo(buscar);
-    console.log(buscar);
+    if(buscar.length>0){
+        construir_cuerpo(buscar);
+    }else{
+        contenedorCartas.innerHTML = `<div class="bg-secondary p-5 radius">
+            <h1 class="text-secondary-enfasis">Lo sentimos no pudimos encontrar al personaje que buscar</h1>
+        </div>`;
+    }
+    
 })
 
-contenedorCartas.addEventListener('click', async (e) =>{
+contenedorCartas.addEventListener('click', (e) =>{
     
     if(e.target.classList.contains('btn-verMas')){
-        console.log(e.target.dataset.id);
 
-        const lista_valores = [image,nombre,edad,cumple,genero,ocupacion,estado,frace,tituloModal];
-
-        const unPersonaje = await obtener_un_personaje(e.target.dataset.id);
-
-        image.src = `https://cdn.thesimpsonsapi.com/500/character/${e.target.dataset.id}.webp`
-        nombre.textContent = unPersonaje.name
-        edad.textContent = edad.textContent === null ? unPersonaje.age : 'Desconocido'
-        cumple.textContent = cumple.textContent === null ? unPersonaje.birthdate : 'Desconocido'
-        genero.textContent = unPersonaje.gender
-        ocupacion.textContent = unPersonaje.occupation
-        estado.textContent = unPersonaje.status
-        frace.textContent = unPersonaje.phrases[0]
-        tituloModal.textContent = unPersonaje.name
-
-
-        if(estado.textContent === "Alive"){
-            estado.classList.add('badge','text-success','bg-light');
-        }else{
-            estado.classList.add('badge' ,'text-danger' ,'bg-light');
-        }
-
-        console.log(unPersonaje)
-        modal.show();
+        try{
+            cambiar_datos_modal(e.target.dataset.id)
+        }catch{
+            modalError.show();
+        }  
     }
 })
 
