@@ -91,6 +91,8 @@ const cambiar_datos_modal  = async (id) => {
     frace.textContent = unPersonaje.phrases[0]
     tituloModal.textContent = unPersonaje.name
 
+    estado.classList.remove('badge','text-success','bg-light') || estado.classList.remove('badge' ,'text-danger' ,'bg-light')
+
     if(estado.textContent === "Alive"){
         estado.classList.add('badge','text-success','bg-light');
     }else{
